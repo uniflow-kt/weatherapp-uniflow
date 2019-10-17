@@ -42,6 +42,7 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(dailyForecasts.mapToWeatherListState())
         }
     }
@@ -55,6 +56,7 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(UIState.Failed(error = error))
         }
     }
@@ -70,6 +72,7 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(dailyForecasts.mapToWeatherListState())
             view.events.onChanged(Event(WeatherListUIEvent.ProceedLocation(location)))
             view.states.onChanged(dailyForecasts.mapToWeatherListState())
@@ -100,6 +103,7 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(dailyForecasts.mapToWeatherListState())
             view.events.onChanged(Event(WeatherListUIEvent.ProceedLocation(location)))
             view.events.onChanged(Event(WeatherListUIEvent.ProceedLocationFailed(location, error)))

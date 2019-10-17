@@ -39,6 +39,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
         viewModel.getWeather()
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(MockedData.dailyForecasts.mapToWeatherListState())
         }
     }
@@ -51,6 +52,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
         viewModel.getWeather()
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(UIState.Failed(error = error))
         }
     }

@@ -12,11 +12,12 @@ class DetailViewModel(private val id: DailyForecastId, private val getWeatherDet
         setState { UIState.Empty }
     }
 
-    fun getDetail() = setState {
-        getWeatherDetail(id)
+    fun getDetail() = stateFlow {
+        setState(UIState.Loading)
+        setState(getWeatherDetail(id)
                 .toState(
                         { it.mapToDetailState() },
-                        { UIState.Failed(error = it) })
+                        { UIState.Failed(error = it) }))
     }
 
 }

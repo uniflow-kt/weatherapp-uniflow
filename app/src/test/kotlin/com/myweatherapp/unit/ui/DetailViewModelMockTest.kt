@@ -42,6 +42,7 @@ class DetailViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(weather.mapToDetailState())
         }
     }
@@ -56,6 +57,7 @@ class DetailViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(UIState.Failed(error = error))
         }
     }

@@ -35,6 +35,7 @@ class SplashViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(UIState.Success)
         }
     }
@@ -48,6 +49,7 @@ class SplashViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
+            view.states.onChanged(UIState.Loading)
             view.states.onChanged(UIState.Failed(error = error))
         }
     }
