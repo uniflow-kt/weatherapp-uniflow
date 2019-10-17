@@ -1,0 +1,32 @@
+apply from: "versions.gradle"
+
+buildscript {
+    apply from: "versions.gradle"
+
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$android_plugin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.google.gms:google-services:$google_service_version"
+        classpath 'io.fabric.tools:gradle:1+'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+        }
+    }
+}
+

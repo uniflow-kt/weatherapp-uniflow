@@ -1,0 +1,47 @@
+Android Architecture - 2018
+
+/data
+- datasource: local: store local data / remote: fetch remote data
+    Shared prefs, room, retrofit ...
+- repositories: fetch and save data (also memory cache)
+- common data entity (for remote and local data), for repository contract
+=> find a common entity to retrieve from repository / data that will be stored
+
+/di -> Dependency injection modules (Koin)
+
+/domain
+-> business domain & usecases
+-> usecase: process data for business logic (single task)
+=> Kotlin function, represents an intent of the system
+
+
+/ui
+- Views & ViewModel
+- abstract Ui logic <> independent from Android
+-> ViewModel: actions & states
+    - action: function to call on VM
+    - states & events: pushed by the VM to the View
+    (Redux/UDF approach)
+-> External scheduler strategies
+
+/testing
+- unit testing
+    - VM
+    - UseCase
+    - Repo
+-> Room requests in androidTests (run queries on real Android db)
+-> integration tests
+
+Mapping / layers
+extension functions mapTo / List<*>.mapTo
+    -> unit test
+
+Coroutines - Scopes Layers projection
+ViewModel -> UseCase -> Repo -> DataSrc
+(context + launch/cancel) -> suspend -> suspend -> suspend / final Thread
+
+--- TODO ---
+- Event Wrapper -> remove SingleLiveEvent / Not Compat with AndroidX
+- AndroidX
+- help / unit testing mappings & repo
+
