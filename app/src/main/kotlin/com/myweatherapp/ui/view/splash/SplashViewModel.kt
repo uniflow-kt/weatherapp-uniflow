@@ -13,10 +13,10 @@ class SplashViewModel(
         setState { UIState.Empty }
     }
 
-    fun getLastWeather() = setState {
-        loadCurrentWeather()
-                .toState({ UIState.Success },
-                        { UIState.Failed(error = it) }
-                )
-    }
+    fun getLastWeather() = setState(
+            {
+                loadCurrentWeather()
+                        .toState { UIState.Success }
+            },
+            { error, _ -> UIState.Failed(error = error) })
 }

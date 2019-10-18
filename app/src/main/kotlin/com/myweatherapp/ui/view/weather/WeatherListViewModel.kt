@@ -28,10 +28,10 @@ class WeatherListViewModel(
                 .toStateOrNull { it.mapToWeatherListState() }
     }
 
-    fun getWeather() = setState {
-        getCurrentWeather()
-                .toState(
-                        { it.mapToWeatherListState() },
-                        { UIState.Failed(error = it) })
-    }
+    fun getWeather() = setState(
+            {
+                getCurrentWeather()
+                        .toState { it.mapToWeatherListState() }
+            },
+            { error, _ -> UIState.Failed(error = error) })
 }
