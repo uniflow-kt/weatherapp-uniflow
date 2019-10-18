@@ -53,7 +53,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
         verifySequence {
             view.states.onChanged(UIState.Empty)
             view.states.onChanged(UIState.Loading)
-            view.states.onChanged(UIState.Failed(error = error))
+            view.states.onChanged(UIState.Failed(error = error, state = UIState.Loading))
         }
     }
 
