@@ -1,13 +1,12 @@
 package com.myweatherapp.unit.usecase
 
-import arrow.core.Success
 import com.myweatherapp.data.repository.weather.WeatherEntityRepository
 import com.myweatherapp.data.repository.weather.mapToDailyForecasts
 import com.myweatherapp.domain.usecase.weather.GetCurrentWeather
 import com.myweatherapp.unit.MockedData
 import io.mockk.coEvery
 import io.mockk.mockk
-import io.uniflow.core.result.get
+import io.uniflow.result.SafeResult
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -25,7 +24,7 @@ class GetCurrentWeatherTest {
 
     @Test
     fun `successful getCurrentWeather`() = runBlocking {
-        coEvery { dailyForecastRepository.getWeather() } returns Success(MockedData.weatherEntities.mapToDailyForecasts())
+        coEvery { dailyForecastRepository.getWeather() } returns SafeResult.Success(MockedData.weatherEntities.mapToDailyForecasts())
 
         val result = getCurrentWeather()
 

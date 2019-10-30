@@ -13,7 +13,7 @@ abstract class ViewModelTest {
     }
 
     @get:Rule
-    var coroutinesMainDispatcherRule = TestDispatchersRule()//TestThreadRule() //UniFlowDispatcherRule()
+    var coroutinesMainDispatcherRule = TestDispatchersRule()
 
     @get:Rule
     val rule = InstantTaskExecutorRule()

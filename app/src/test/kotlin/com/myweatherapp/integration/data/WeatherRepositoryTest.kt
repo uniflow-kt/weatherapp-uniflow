@@ -2,7 +2,6 @@ package com.myweatherapp.integration.data
 
 import com.myweatherapp.data.repository.weather.WeatherEntityRepository
 import com.myweatherapp.di.testWeatherApp
-import io.uniflow.core.result.get
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before

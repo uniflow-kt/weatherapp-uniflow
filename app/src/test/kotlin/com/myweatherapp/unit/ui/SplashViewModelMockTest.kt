@@ -1,7 +1,5 @@
 package com.myweatherapp.unit.ui
 
-import arrow.core.Failure
-import arrow.core.Success
 import com.myweatherapp.domain.usecase.weather.LoadCurrentWeather
 import com.myweatherapp.ui.view.splash.SplashViewModel
 import com.myweatherapp.unit.mvvm.ViewModelTest
@@ -11,6 +9,7 @@ import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.mockObservers
 import io.uniflow.core.flow.UIState
+import io.uniflow.result.SafeResult
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -29,7 +28,7 @@ class SplashViewModelMockTest : ViewModelTest() {
 
     @Test
     fun testGetLastWeather() = runBlocking {
-        coEvery { loadCurrentWeather() } returns Success(Unit)
+        coEvery { loadCurrentWeather() } returns SafeResult.Success(Unit)
 
         viewModel.getLastWeather()
 
@@ -42,7 +41,7 @@ class SplashViewModelMockTest : ViewModelTest() {
     @Test
     fun testGetLasttWeatherFailed() = runBlocking {
         val error = Exception("Got an error")
-        coEvery { loadCurrentWeather() } returns Failure(error)
+        coEvery { loadCurrentWeather() } returns SafeResult.Failure(error)
 
         viewModel.getLastWeather()
 

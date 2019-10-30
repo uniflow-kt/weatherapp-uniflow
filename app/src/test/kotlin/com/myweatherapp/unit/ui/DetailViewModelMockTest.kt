@@ -1,7 +1,5 @@
 package com.myweatherapp.unit.ui
 
-import arrow.core.Failure
-import arrow.core.Success
 import com.myweatherapp.domain.model.weather.DailyForecastId
 import com.myweatherapp.domain.usecase.weather.GetWeatherDetail
 import com.myweatherapp.ui.view.detail.DetailViewModel
@@ -14,6 +12,7 @@ import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.mockObservers
 import io.uniflow.core.flow.UIState
+import io.uniflow.result.SafeResult
 import org.junit.Before
 import org.junit.Test
 
@@ -36,7 +35,7 @@ class DetailViewModelMockTest : ViewModelTest() {
     fun testGetLastWeather() {
         val weather = MockedData.dailyForecasts.first()
 
-        coEvery { getWeatherDetail(id) } returns Success(weather)
+        coEvery { getWeatherDetail(id) } returns SafeResult.Success(weather)
 
         detailViewModel.getDetail()
 
@@ -50,7 +49,7 @@ class DetailViewModelMockTest : ViewModelTest() {
     fun testGeLasttWeatherFailed() {
         val error = Exception("Got error")
 
-        coEvery { getWeatherDetail(id) } returns Failure(error)
+        coEvery { getWeatherDetail(id) } returns SafeResult.Failure(error)
 
         detailViewModel.getDetail()
 

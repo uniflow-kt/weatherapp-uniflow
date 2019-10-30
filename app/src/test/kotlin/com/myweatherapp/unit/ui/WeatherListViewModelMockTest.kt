@@ -1,7 +1,5 @@
 package com.myweatherapp.unit.ui
 
-import arrow.core.Failure
-import arrow.core.Success
 import com.myweatherapp.domain.usecase.weather.GetCurrentWeather
 import com.myweatherapp.domain.usecase.weather.GetWeatherForGivenLocation
 import com.myweatherapp.ui.view.weather.WeatherListViewModel
@@ -14,6 +12,8 @@ import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.mockObservers
 import io.uniflow.core.flow.UIState
+import io.uniflow.result.SafeResult.Companion.failure
+import io.uniflow.result.SafeResult.Companion.success
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -34,7 +34,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
 
     @Test
     fun testDisplayList() = runBlocking {
-        coEvery { getCurrentWeather() } returns Success(MockedData.dailyForecasts)
+        coEvery { getCurrentWeather() } returns success(MockedData.dailyForecasts)
 
         viewModel.getWeather()
         verifySequence {
@@ -46,7 +46,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
     @Test
     fun testDisplayListFailed() = runBlocking {
         val error = Exception("Got an error")
-        coEvery { getCurrentWeather() } returns Failure(error)
+        coEvery { getCurrentWeather() } returns failure(error)
 
         viewModel.getWeather()
         verifySequence {

@@ -8,9 +8,6 @@ import com.myweatherapp.ui.view.weather.uimodel.mapToWeatherListState
 import io.uniflow.androidx.flow.AndroidDataFlow
 import io.uniflow.core.flow.UIState
 import io.uniflow.core.flow.fromState
-import io.uniflow.core.result.onFailure
-import io.uniflow.core.result.toState
-import io.uniflow.core.result.toStateOrNull
 
 class WeatherListViewModel(
         private val getCurrentWeather: GetCurrentWeather,
@@ -30,8 +27,7 @@ class WeatherListViewModel(
 
     fun getWeather() = setState(
             {
-                getCurrentWeather()
-                        .toState { it.mapToWeatherListState() }
+                getCurrentWeather().toState { it.mapToWeatherListState() }
             },
-            { error, _ -> UIState.Failed(error = error) })
+            { error -> UIState.Failed(error = error) })
 }

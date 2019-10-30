@@ -3,7 +3,6 @@ package com.myweatherapp.ui.view.splash
 import com.myweatherapp.domain.usecase.weather.LoadCurrentWeather
 import io.uniflow.androidx.flow.AndroidDataFlow
 import io.uniflow.core.flow.UIState
-import io.uniflow.core.result.toState
 
 class SplashViewModel(
         private val loadCurrentWeather: LoadCurrentWeather
@@ -15,8 +14,7 @@ class SplashViewModel(
 
     fun getLastWeather() = setState(
             {
-                loadCurrentWeather()
-                        .toState { UIState.Success }
+                loadCurrentWeather().toState { UIState.Success }
             },
-            { error, _ -> UIState.Failed(error = error) })
+            { error -> UIState.Failed(error = error) })
 }

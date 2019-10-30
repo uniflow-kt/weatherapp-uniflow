@@ -1,9 +1,9 @@
 package com.myweatherapp.domain.usecase.weather
 
-import arrow.core.Try
+import io.uniflow.result.SafeResult
 
 class LoadCurrentWeather(private val getCurrentWeather: GetCurrentWeather) {
-    suspend operator fun invoke(): Try<Unit> {
+    suspend operator fun invoke(): SafeResult<Unit> {
         return getCurrentWeather().map { Unit }
     }
 }
