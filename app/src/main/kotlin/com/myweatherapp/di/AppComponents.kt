@@ -10,11 +10,8 @@ import com.myweatherapp.domain.usecase.weather.LoadCurrentWeather
 import com.myweatherapp.ui.view.detail.DetailViewModel
 import com.myweatherapp.ui.view.splash.SplashViewModel
 import com.myweatherapp.ui.view.weather.WeatherListViewModel
-import org.koin.androidx.experimental.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import org.koin.experimental.builder.factory
-import org.koin.experimental.builder.singleBy
 
 /**
  * App Components
@@ -22,17 +19,17 @@ import org.koin.experimental.builder.singleBy
 val appModule = module {
     // ViewModels
     viewModel { (id: DailyForecastId) -> DetailViewModel(id, get()) }
-    viewModel<SplashViewModel>()
-    viewModel<WeatherListViewModel>()
+    viewModel { SplashViewModel(get()) }
+    viewModel { WeatherListViewModel(get(), get()) }
 
     // Use cases
-    factory<GetWeatherDetail>()
-    factory<GetWeatherForGivenLocation>()
-    factory<GetCurrentWeather>()
-    factory<LoadCurrentWeather>()
+    factory { GetWeatherDetail(get()) }
+    factory { GetWeatherForGivenLocation(get()) }
+    factory { GetCurrentWeather(get()) }
+    factory { LoadCurrentWeather(get()) }
 
     // Data Repository
-    singleBy<WeatherEntityRepository, WeatherEntityRepositoryImpl>()
+    single<WeatherEntityRepository> { WeatherEntityRepositoryImpl(get()) }
 }
 
 // Gather all app modules

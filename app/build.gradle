@@ -97,7 +97,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
     // Koin
-    implementation "org.koin:koin-androidx-ext:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation "org.koin:koin-test:$koin_version"
 

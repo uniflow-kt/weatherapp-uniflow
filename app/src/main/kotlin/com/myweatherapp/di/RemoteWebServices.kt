@@ -26,7 +26,7 @@ object Properties {
 
 fun createOkHttpClient(mockInterceptor: MockInterceptor? = null): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
-    httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
+    httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.HEADERS
     val builder = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
     return if (mockInterceptor != null) builder.addInterceptor(mockInterceptor).build() else builder.build()
