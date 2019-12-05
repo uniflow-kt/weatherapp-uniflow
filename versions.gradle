@@ -3,8 +3,8 @@ ext {
     kotlin_version = '1.3.50'
     coroutines_version = "1.3.0"
 
-    koin_version = '2.1.0-alpha-6'
-    uniflow_version = "0.8.10"
+    koin_version = '2.1.0-alpha-7'
+    uniflow_version = "0.9.0"
 
     moshi_version = "1.8.0"
 
