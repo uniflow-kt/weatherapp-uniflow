@@ -1,6 +1,6 @@
 package com.myweatherapp.ui.view.weather.uimodel
 
-import io.uniflow.core.flow.UIEvent
+import io.uniflow.core.flow.data.UIEvent
 
 sealed class WeatherListUIEvent : UIEvent() {
     data class ProceedLocation(val location: String) : WeatherListUIEvent()

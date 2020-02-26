@@ -9,7 +9,7 @@ import com.myweatherapp.domain.model.weather.getColorFromCode
 import com.myweatherapp.ui.navigation.param
 import com.myweatherapp.ui.view.Arguments
 import io.uniflow.androidx.flow.onStates
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -30,8 +30,8 @@ class DetailActivity : AppCompatActivity() {
         onStates(detailViewModel) { state ->
             when (state) {
                 //omit Loading & Empty state
-                is UIState.Failed -> showError(state.error)
                 is DetailState -> showDetail(state)
+                is UIState.Failed -> showError(state.error)
             }
         }
         detailViewModel.getDetail()
@@ -39,9 +39,9 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showError(error: Throwable?) {
         Snackbar.make(
-                weatherItem,
-                getString(R.string.loading_error) + " - $error",
-                Snackbar.LENGTH_LONG
+            weatherItem,
+            getString(R.string.loading_error) + " - $error",
+            Snackbar.LENGTH_LONG
         ).show()
     }
 

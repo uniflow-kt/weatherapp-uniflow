@@ -6,7 +6,6 @@ import com.myweatherapp.domain.usecase.weather.GetCurrentWeather
 import com.myweatherapp.unit.MockedData
 import io.mockk.coEvery
 import io.mockk.mockk
-import io.uniflow.result.SafeResult
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -24,11 +23,11 @@ class GetCurrentWeatherTest {
 
     @Test
     fun `successful getCurrentWeather`() = runBlocking {
-        coEvery { dailyForecastRepository.getWeather() } returns SafeResult.Success(MockedData.weatherEntities.mapToDailyForecasts())
+        coEvery { dailyForecastRepository.getWeather() } returns MockedData.weatherEntities.mapToDailyForecasts()
 
         val result = getCurrentWeather()
 
-        assertEquals(MockedData.weatherEntities.mapToDailyForecasts(), result.get())
+        assertEquals(MockedData.weatherEntities.mapToDailyForecasts(), result)
     }
 
     @Test

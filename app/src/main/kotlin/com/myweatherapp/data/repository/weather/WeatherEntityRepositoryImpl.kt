@@ -8,39 +8,39 @@ import com.myweatherapp.data.repository.weather.DefaultParameters.DEFAULT_LANG
 import com.myweatherapp.data.repository.weather.DefaultParameters.DEFAULT_LOCATION
 import com.myweatherapp.domain.model.weather.DailyForecast
 import com.myweatherapp.domain.model.weather.DailyForecastId
-import io.uniflow.result.SafeResult
-import io.uniflow.result.SafeResult.Companion.safeResult
-import io.uniflow.result.success
 
 /**
  * Weather repository
  * Make use of WeatherDataSource & add some cache
  */
 class WeatherEntityRepositoryImpl(private val weatherDatasource: WeatherDataSource) :
-        WeatherEntityRepository {
+    WeatherEntityRepository {
 
     private val weatherCache = arrayListOf<WeatherEntity>()
 
     private fun lastLocationFromCache() = weatherCache.firstOrNull()?.location
 
-    override suspend fun getWeatherDetail(id: DailyForecastId): SafeResult<DailyForecast> = safeResult { weatherCache.first { it.id == id.value } }.map { it.mapToDailyForecast() }
+    override suspend fun getWeatherDetail(
+        id: DailyForecastId): DailyForecast = weatherCache.first { it.id == id.value }.mapToDailyForecast()
 
     override suspend fun getWeather(
-            location: String?
-    ): SafeResult<List<DailyForecast>> {
+        location: String?
+    ): List<DailyForecast> {
         // Take cache
-        return if (isAlreadyInCache(location)) weatherCache.mapToDailyForecasts().success()
+        return if (isAlreadyInCache(location)) weatherCache.mapToDailyForecasts()
         else {
             weatherCache.clear()
 
             val targetLocation: String = location ?: lastLocationFromCache() ?: DEFAULT_LOCATION
 
-            safeResult { weatherDatasource.geocode(targetLocation).await() }
-                    .map { it.mapToLocation() ?: error("Can't map to location: $it") }
-                    .flatMap { (lat, lng) -> safeResult { weatherDatasource.weather(lat, lng, DEFAULT_LANG).await() } }
-                    .map { it.mapToWeatherEntities(targetLocation) }
-                    .onSuccess { weatherCache.addAll(it) }
-                    .map { it.mapToDailyForecasts() }
+            val (lat, lng) = weatherDatasource.geocode(targetLocation).await().mapToLocation() ?: error(
+                "Can't map to location: '$targetLocation'")
+
+            val weather: List<WeatherEntity> = weatherDatasource.weather(lat, lng,
+                DEFAULT_LANG).await().mapToWeatherEntities(targetLocation)
+
+            weatherCache.addAll(weather)
+            weather.mapToDailyForecasts()
         }
     }
 

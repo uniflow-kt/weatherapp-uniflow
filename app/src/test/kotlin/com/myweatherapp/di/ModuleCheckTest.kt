@@ -6,16 +6,18 @@ import com.myweatherapp.domain.model.weather.DailyForecastId
 import com.myweatherapp.ui.view.detail.DetailViewModel
 import org.junit.Rule
 import org.junit.Test
+import org.junit.experimental.categories.Category
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.parameter.parametersOf
-import org.koin.dsl.koinApplication
 import org.koin.test.KoinTest
+import org.koin.test.category.CheckModuleTest
 import org.koin.test.check.checkModules
 import org.mockito.Mockito.mock
 
 /**
  * Test Koin modules
  */
+@Category(CheckModuleTest::class)
 class ModuleCheckTest : KoinTest {
 
     // Because we have some init states
@@ -29,36 +31,36 @@ class ModuleCheckTest : KoinTest {
 
     @Test
     fun testRemoteConfiguration() {
-        koinApplication {
+        checkModules(parameters = {
+            create<DetailViewModel> { parametersOf(DailyForecastId(fakeId)) }
+        }) {
             printLogger()
             modules(onlineWeatherApp)
             properties(hashMapOf(Properties.SERVER_URL to fakeUrl))
-        }.checkModules {
-            create<DetailViewModel> { parametersOf(DailyForecastId(fakeId)) }
         }
     }
 
     @Test
     fun testLocalConfiguration() {
-        koinApplication {
+        checkModules(parameters = {
+            create<DetailViewModel> { parametersOf(DailyForecastId(fakeId)) }
+        }) {
             printLogger()
             androidContext(mockedAndroidContext)
             modules(offlineWeatherApp)
             properties(hashMapOf(Properties.SERVER_URL to fakeUrl))
-        }.checkModules {
-            create<DetailViewModel> { parametersOf(DailyForecastId(fakeId)) }
         }
     }
 
     @Test
     fun testTestConfiguration() {
-        koinApplication {
+        checkModules(parameters = {
+            create<DetailViewModel> { parametersOf(DailyForecastId(fakeId)) }
+        }) {
             printLogger()
             androidContext(mockedAndroidContext)
             modules(testWeatherApp)
             properties(hashMapOf(Properties.SERVER_URL to fakeUrl))
-        }.checkModules {
-            create<DetailViewModel> { parametersOf(DailyForecastId(fakeId)) }
         }
     }
 }

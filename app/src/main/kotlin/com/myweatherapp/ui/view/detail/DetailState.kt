@@ -1,6 +1,6 @@
 package com.myweatherapp.ui.view.detail
 
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIState
 
 data class DetailState(val icon: String,
                        val day: String,

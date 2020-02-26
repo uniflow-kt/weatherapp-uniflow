@@ -9,7 +9,7 @@ import com.myweatherapp.R
 import com.myweatherapp.ui.navigation.navigateTo
 import com.myweatherapp.ui.view.weather.uimodel.WeatherListState
 import io.uniflow.androidx.flow.onStates
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.activity_result.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,10 +30,10 @@ class WeatherActivity : AppCompatActivity() {
         val resultListFragment = WeatherListFragment()
 
         supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.weather_title, weatherTitleFragment)
-                .replace(R.id.weather_list, resultListFragment)
-                .commit()
+            .beginTransaction()
+            .replace(R.id.weather_title, weatherTitleFragment)
+            .replace(R.id.weather_list, resultListFragment)
+            .commit()
 
 
         onStates(viewModel) { state ->
@@ -61,13 +61,13 @@ class WeatherActivity : AppCompatActivity() {
         weather_views.visibility = View.GONE
         weather_error.visibility = View.VISIBLE
         Snackbar.make(
-                weather_result,
-                "WeatherActivity got error : $error",
-                Snackbar.LENGTH_INDEFINITE
+            weather_result,
+            "WeatherActivity got error : $error",
+            Snackbar.LENGTH_INDEFINITE
         )
-                .setAction(R.string.retry) {
-                    navigateTo<WeatherActivity>(isRoot = true)
-                }
-                .show()
+            .setAction(R.string.retry) {
+                navigateTo<WeatherActivity>(isRoot = true)
+            }
+            .show()
     }
 }

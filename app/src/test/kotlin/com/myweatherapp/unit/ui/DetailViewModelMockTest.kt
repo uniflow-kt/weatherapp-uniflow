@@ -11,8 +11,7 @@ import io.mockk.mockk
 import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.mockObservers
-import io.uniflow.core.flow.UIState
-import io.uniflow.result.SafeResult
+import io.uniflow.core.flow.data.UIState
 import org.junit.Before
 import org.junit.Test
 
@@ -35,7 +34,7 @@ class DetailViewModelMockTest : ViewModelTest() {
     fun testGetLastWeather() {
         val weather = MockedData.dailyForecasts.first()
 
-        coEvery { getWeatherDetail(id) } returns SafeResult.Success(weather)
+        coEvery { getWeatherDetail(id) } returns weather
 
         detailViewModel.getDetail()
 
@@ -49,7 +48,7 @@ class DetailViewModelMockTest : ViewModelTest() {
     fun testGeLasttWeatherFailed() {
         val error = Exception("Got error")
 
-        coEvery { getWeatherDetail(id) } returns SafeResult.Failure(error)
+        coEvery { getWeatherDetail(id) } throws error
 
         detailViewModel.getDetail()
 

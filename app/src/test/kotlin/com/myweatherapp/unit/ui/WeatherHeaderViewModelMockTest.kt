@@ -12,11 +12,9 @@ import io.mockk.mockk
 import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.mockObservers
-import io.uniflow.core.flow.Event
-import io.uniflow.core.flow.UIEvent
-import io.uniflow.core.flow.UIState
-import io.uniflow.result.SafeResult.Companion.failure
-import io.uniflow.result.SafeResult.Companion.success
+import io.uniflow.core.flow.data.Event
+import io.uniflow.core.flow.data.UIEvent
+import io.uniflow.core.flow.data.UIState
 import org.junit.Before
 import org.junit.Test
 
@@ -36,7 +34,7 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
 
     @Test
     fun testDisplayList() {
-        coEvery { getCurrentWeather() } returns success(dailyForecasts)
+        coEvery { getCurrentWeather() } returns dailyForecasts
 
         viewModel.getWeather()
 
@@ -49,7 +47,7 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
     @Test
     fun testDisplayListFailed() {
         val error = Exception("Got an error")
-        coEvery { getCurrentWeather() } returns failure(error)
+        coEvery { getCurrentWeather() } throws error
 
         viewModel.getWeather()
 
@@ -62,8 +60,8 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
     @Test
     fun testSearchNewLocation() {
         val location = "new location"
-        coEvery { getCurrentWeather() } returns success(dailyForecasts)
-        coEvery { getWeatherForLocation(location) } returns success(dailyForecasts)
+        coEvery { getCurrentWeather() } returns dailyForecasts
+        coEvery { getWeatherForLocation(location) } returns dailyForecasts
 
         viewModel.getWeather()
         viewModel.loadNewLocation(location)
@@ -92,8 +90,8 @@ class WeatherHeaderViewModelMockTest : ViewModelTest() {
         val location = "new location"
         val error = Exception("Got an error")
 
-        coEvery { getCurrentWeather() } returns success(dailyForecasts)
-        coEvery { getWeatherForLocation(location) } returns failure(error)
+        coEvery { getCurrentWeather() } returns dailyForecasts
+        coEvery { getWeatherForLocation(location) } throws error
 
         viewModel.getWeather()
         viewModel.loadNewLocation(location)

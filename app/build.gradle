@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'koin'
 
 android {
     signingConfigs {
@@ -103,7 +104,7 @@ dependencies {
 
     // UniFlow
     implementation "io.uniflow:uniflow-androidx:$uniflow_version"
-    implementation "io.uniflow:uniflow-saferesult:$uniflow_version"
+//    implementation "io.uniflow:uniflow-saferesult:$uniflow_version"
     testImplementation "io.uniflow:uniflow-test:$uniflow_version"
     testImplementation "io.uniflow:uniflow-androidx-test:$uniflow_version"
 

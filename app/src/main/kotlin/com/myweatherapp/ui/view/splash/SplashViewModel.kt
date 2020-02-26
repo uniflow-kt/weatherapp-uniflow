@@ -2,19 +2,16 @@ package com.myweatherapp.ui.view.splash
 
 import com.myweatherapp.domain.usecase.weather.LoadCurrentWeather
 import io.uniflow.androidx.flow.AndroidDataFlow
-import io.uniflow.core.flow.UIState
+import io.uniflow.core.flow.data.UIEvent
+import io.uniflow.core.flow.data.UIState
 
 class SplashViewModel(
-        private val loadCurrentWeather: LoadCurrentWeather
-) : AndroidDataFlow() {
+    private val loadCurrentWeather: LoadCurrentWeather
+) : AndroidDataFlow(UIState.Empty) {
 
-    init {
-        setState { UIState.Empty }
+    fun getLastWeather() = action {
+        sendEvent { UIEvent.Loading }
+        loadCurrentWeather()
+        setState { UIState.Success }
     }
-
-    fun getLastWeather() = setState(
-            {
-                loadCurrentWeather().toState { UIState.Success }
-            },
-            { error -> UIState.Failed(error = error) })
 }

@@ -11,9 +11,7 @@ import io.mockk.mockk
 import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.mockObservers
-import io.uniflow.core.flow.UIState
-import io.uniflow.result.SafeResult.Companion.failure
-import io.uniflow.result.SafeResult.Companion.success
+import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -34,7 +32,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
 
     @Test
     fun testDisplayList() = runBlocking {
-        coEvery { getCurrentWeather() } returns success(MockedData.dailyForecasts)
+        coEvery { getCurrentWeather() } returns MockedData.dailyForecasts
 
         viewModel.getWeather()
         verifySequence {
@@ -46,7 +44,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
     @Test
     fun testDisplayListFailed() = runBlocking {
         val error = Exception("Got an error")
-        coEvery { getCurrentWeather() } returns failure(error)
+        coEvery { getCurrentWeather() } throws error
 
         viewModel.getWeather()
         verifySequence {

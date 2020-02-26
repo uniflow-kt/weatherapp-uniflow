@@ -3,7 +3,9 @@ package com.myweatherapp.integration.data
 import com.myweatherapp.data.repository.weather.WeatherEntityRepository
 import com.myweatherapp.di.testWeatherApp
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNotSame
 import org.junit.Before
 import org.junit.Test
 import org.koin.core.context.startKoin
@@ -45,8 +47,8 @@ class WeatherRepositoryTest : AutoCloseKoinTest() {
     fun testGetDetail() = runBlocking {
         repository.getWeather(location)
         val list = repository.getWeather(location)
-        val first = list.get().first()
+        val first = list.first()
         val detail = repository.getWeatherDetail(first.id)
-        assertEquals(first, detail.get())
+        assertEquals(first, detail)
     }
 }
