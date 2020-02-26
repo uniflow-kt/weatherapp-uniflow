@@ -8,9 +8,10 @@ import io.uniflow.core.flow.data.UIState
 class DetailViewModel(private val id: DailyForecastId,
     private val getWeatherDetail: GetWeatherDetail) : AndroidDataFlow(UIState.Empty) {
 
-    fun getDetail() = action {
-        val dailyForecast = getWeatherDetail(id)
-        setState { dailyForecast.mapToDetailState() }
-    }
-
+    fun getDetail() = action(
+        onAction = {
+            val dailyForecast = getWeatherDetail(id)
+            setState { dailyForecast.mapToDetailState() }
+        },
+        onError = { error, _ -> setState { UIState.Failed("getDetail failed", error) } })
 }

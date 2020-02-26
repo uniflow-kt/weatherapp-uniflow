@@ -46,7 +46,7 @@ class DetailViewModelMockTest : ViewModelTest() {
 
     @Test
     fun testGeLasttWeatherFailed() {
-        val error = Exception("Got error")
+        val error = Exception("boom")
 
         coEvery { getWeatherDetail(id) } throws error
 
@@ -54,7 +54,7 @@ class DetailViewModelMockTest : ViewModelTest() {
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
-            view.states.onChanged(UIState.Failed(error = error))
+            view.states.onChanged(UIState.Failed("getDetail failed",error = error))
         }
     }
 }

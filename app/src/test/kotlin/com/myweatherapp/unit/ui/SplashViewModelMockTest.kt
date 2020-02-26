@@ -39,14 +39,14 @@ class SplashViewModelMockTest : ViewModelTest() {
 
     @Test
     fun testGetLasttWeatherFailed() = runBlocking {
-        val error = Exception("Got an error")
+        val error = Exception("boom")
         coEvery { loadCurrentWeather() } throws error
 
         viewModel.getLastWeather()
 
         verifySequence {
             view.states.onChanged(UIState.Empty)
-            view.states.onChanged(UIState.Failed(error = error))
+            view.states.onChanged(UIState.Failed("getLastWeather failed",error = error))
         }
     }
 }

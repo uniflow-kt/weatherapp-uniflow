@@ -22,8 +22,10 @@ class WeatherListViewModel(
         },
         onError = { error, _ -> sendEvent(WeatherListUIEvent.ProceedLocationFailed(location, error)) })
 
-    fun getWeather() = action {
-        val forecast = getCurrentWeather()
-        setState { forecast.mapToWeatherListState() }
-    }
+    fun getWeather() = action(
+        onAction = {
+            val forecast = getCurrentWeather()
+            setState { forecast.mapToWeatherListState() }
+        },
+        onError = { error, _ -> setState { UIState.Failed("getWeather failed", error) } })
 }

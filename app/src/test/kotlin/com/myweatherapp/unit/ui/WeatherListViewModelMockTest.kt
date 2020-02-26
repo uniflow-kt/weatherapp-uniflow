@@ -43,13 +43,13 @@ class WeatherListViewModelMockTest : ViewModelTest() {
 
     @Test
     fun testDisplayListFailed() = runBlocking {
-        val error = Exception("Got an error")
+        val error = Exception("boom")
         coEvery { getCurrentWeather() } throws error
 
         viewModel.getWeather()
         verifySequence {
             view.states.onChanged(UIState.Empty)
-            view.states.onChanged(UIState.Failed(error = error))
+            view.states.onChanged(UIState.Failed("getWeather failed",error = error))
         }
     }
 

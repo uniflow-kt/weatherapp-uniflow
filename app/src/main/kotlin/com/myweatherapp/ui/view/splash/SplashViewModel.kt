@@ -9,9 +9,11 @@ class SplashViewModel(
     private val loadCurrentWeather: LoadCurrentWeather
 ) : AndroidDataFlow(UIState.Empty) {
 
-    fun getLastWeather() = action {
-        sendEvent { UIEvent.Loading }
-        loadCurrentWeather()
-        setState { UIState.Success }
-    }
+    fun getLastWeather() = action(
+        onAction = {
+            sendEvent { UIEvent.Loading }
+            loadCurrentWeather()
+            setState { UIState.Success }
+        },
+        onError = { error, _ -> setState { UIState.Failed("getLastWeather failed", error) } })
 }
