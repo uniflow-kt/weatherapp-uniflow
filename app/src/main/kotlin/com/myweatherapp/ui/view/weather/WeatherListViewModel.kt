@@ -12,7 +12,7 @@ import io.uniflow.core.flow.data.UIState
 class WeatherListViewModel(
     private val getCurrentWeather: GetCurrentWeather,
     private val getWeatherForLocation: GetWeatherForGivenLocation
-) : AndroidDataFlow(UIState.Empty) {
+) : AndroidDataFlow() {
 
     fun loadNewLocation(location: String) = actionOn<WeatherListState>(
         onAction = {

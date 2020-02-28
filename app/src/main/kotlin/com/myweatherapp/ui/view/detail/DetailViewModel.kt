@@ -6,7 +6,7 @@ import io.uniflow.androidx.flow.AndroidDataFlow
 import io.uniflow.core.flow.data.UIState
 
 class DetailViewModel(private val id: DailyForecastId,
-    private val getWeatherDetail: GetWeatherDetail) : AndroidDataFlow(UIState.Empty) {
+    private val getWeatherDetail: GetWeatherDetail) : AndroidDataFlow() {
 
     fun getDetail() = action(
         onAction = {

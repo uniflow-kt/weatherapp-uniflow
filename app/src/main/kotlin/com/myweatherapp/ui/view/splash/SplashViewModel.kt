@@ -7,7 +7,7 @@ import io.uniflow.core.flow.data.UIState
 
 class SplashViewModel(
     private val loadCurrentWeather: LoadCurrentWeather
-) : AndroidDataFlow(UIState.Empty) {
+) : AndroidDataFlow() {
 
     fun getLastWeather() = action(
         onAction = {
