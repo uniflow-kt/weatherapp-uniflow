@@ -6,14 +6,14 @@ import io.uniflow.core.flow.data.UIEvent
 import io.uniflow.core.flow.data.UIState
 
 class SplashViewModel(
-    private val loadCurrentWeather: LoadCurrentWeather
+        private val loadCurrentWeather: LoadCurrentWeather
 ) : AndroidDataFlow() {
 
     fun getLastWeather() = action(
-        onAction = {
-            sendEvent { UIEvent.Loading }
-            loadCurrentWeather()
-            setState { UIState.Success }
-        },
-        onError = { error, _ -> setState { UIState.Failed("getLastWeather failed", error) } })
+            onAction = {
+                sendEvent { UIEvent.Loading }
+                loadCurrentWeather()
+                setState { UIState.Success }
+            },
+            onError = { error, _ -> setState { UIState.Failed("getLastWeather failed", error) } })
 }

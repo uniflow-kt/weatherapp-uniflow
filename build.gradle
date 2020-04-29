@@ -22,6 +22,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url  "https://dl.bintray.com/ekito/koin"
+        }
         mavenLocal()
         google()
         jcenter()

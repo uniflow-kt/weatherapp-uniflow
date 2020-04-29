@@ -98,7 +98,10 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
     // Koin
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    testImplementation "org.koin:koin-core:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation "org.koin:koin-test:$koin_version"
 
@@ -110,7 +113,6 @@ dependencies {
 
     // ViewModel and LiveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
     testImplementation 'androidx.arch.core:core-testing:2.0.1'
 
     // Room
