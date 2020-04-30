@@ -16,13 +16,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 /**
  * Search Weather View
  */
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity(R.layout.activity_splash) {
 
     private val splashViewModel: SplashViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
 
         onStates(splashViewModel) { state ->
             when (state) {

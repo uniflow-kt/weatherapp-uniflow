@@ -3,11 +3,10 @@ package com.myweatherapp.ui.view.weather
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.myweatherapp.R
 import com.myweatherapp.domain.model.weather.getColorFromCode
@@ -21,17 +20,9 @@ import io.uniflow.androidx.flow.onStates
 import kotlinx.android.synthetic.main.fragment_result_header.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class WeatherHeaderFragment : androidx.fragment.app.Fragment() {
+class WeatherHeaderFragment : Fragment(R.layout.fragment_result_header) {
 
     private val viewModel: WeatherListViewModel by sharedViewModel()
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_result_header, container, false) as ViewGroup
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,9 +1,8 @@
 package com.myweatherapp.ui.view.weather
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myweatherapp.R
 import com.myweatherapp.ui.view.navigateToDetailActivity
@@ -11,20 +10,12 @@ import com.myweatherapp.ui.view.weather.adapter.WeatherListAdapter
 import com.myweatherapp.ui.view.weather.adapter.WeatherUIItem
 import com.myweatherapp.ui.view.weather.uimodel.WeatherListState
 import io.uniflow.androidx.flow.onStates
-import kotlinx.android.synthetic.main.fragment_result_list.*
+import kotlinx.android.synthetic.main.fragment_result_list.weatherList
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class WeatherListFragment : androidx.fragment.app.Fragment() {
+class WeatherListFragment : Fragment(R.layout.fragment_result_list) {
 
     private val viewModel: WeatherListViewModel by sharedViewModel()
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_result_list, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
