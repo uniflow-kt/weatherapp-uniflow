@@ -9,6 +9,7 @@ import com.myweatherapp.R
 import com.myweatherapp.ui.navigation.navigateTo
 import com.myweatherapp.ui.view.weather.WeatherActivity
 import io.uniflow.androidx.flow.onStates
+import io.uniflow.core.flow.data.UIError
 import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,7 +45,7 @@ class SplashActivity : AppCompatActivity() {
         navigateTo<WeatherActivity>(isRoot = true)
     }
 
-    private fun showError(error: Throwable?) {
+    private fun showError(error: UIError?) {
         splashIcon.visibility = View.GONE
         splashIconFail.visibility = View.VISIBLE
         Snackbar.make(splash, "SplashActivity got error : $error", Snackbar.LENGTH_INDEFINITE)

@@ -9,6 +9,7 @@ import com.myweatherapp.R
 import com.myweatherapp.ui.navigation.navigateTo
 import com.myweatherapp.ui.view.weather.uimodel.WeatherListState
 import io.uniflow.androidx.flow.onStates
+import io.uniflow.core.flow.data.UIError
 import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.activity_result.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -56,7 +57,7 @@ class WeatherActivity : AppCompatActivity() {
         weather_error.visibility = View.GONE
     }
 
-    private fun showError(error: Throwable?) {
+    private fun showError(error: UIError?) {
         Log.e(TAG, "error $error while displaying weather")
         weather_views.visibility = View.GONE
         weather_error.visibility = View.VISIBLE

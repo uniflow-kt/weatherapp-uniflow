@@ -10,6 +10,8 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
+import io.uniflow.android.test.TestViewObserver
+import io.uniflow.android.test.createTestObserver
 import io.uniflow.android.test.mockObservers
 import io.uniflow.core.flow.data.UIState
 import org.junit.Before
@@ -19,7 +21,7 @@ import org.junit.Test
 class DetailViewModelMockTest : ViewModelTest() {
 
     lateinit var detailViewModel: DetailViewModel
-    lateinit var view: MockedViewObserver
+    lateinit var view: TestViewObserver
 
     val getWeatherDetail: GetWeatherDetail = mockk()
     val id = DailyForecastId("ID")
@@ -27,7 +29,7 @@ class DetailViewModelMockTest : ViewModelTest() {
     @Before
     fun before() {
         detailViewModel = DetailViewModel(id, getWeatherDetail)
-        view = detailViewModel.mockObservers()
+        view = detailViewModel.createTestObserver()
     }
 
     @Test
@@ -38,10 +40,10 @@ class DetailViewModelMockTest : ViewModelTest() {
 
         detailViewModel.getDetail()
 
-        verifySequence {
-            view.states.onChanged(UIState.Empty)
-            view.states.onChanged(weather.mapToDetailState())
-        }
+        view.verifySequence(
+            UIState.Empty,
+            weather.mapToDetailState()
+        )
     }
 
     @Test
@@ -52,9 +54,9 @@ class DetailViewModelMockTest : ViewModelTest() {
 
         detailViewModel.getDetail()
 
-        verifySequence {
-            view.states.onChanged(UIState.Empty)
-            view.states.onChanged(UIState.Failed("getDetail failed",error = error))
-        }
+        view.verifySequence(
+            UIState.Empty,
+            UIState.Failed("getDetail failed",error = error)
+        )
     }
 }

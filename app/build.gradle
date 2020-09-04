@@ -29,8 +29,7 @@ android {
         // used by Room, to test migrations
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["room.schemaLocation":
-                                     "$projectDir/schemas".toString()]
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
     }
@@ -55,8 +54,7 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
 
         // used by Room, to test migrations
-        androidTest.assets.srcDirs +=
-                files("$projectDir/schemas".toString())
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 }
 
@@ -85,7 +83,7 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation ("com.squareup.moshi:moshi-kotlin:$moshi_version") {
+    implementation("com.squareup.moshi:moshi-kotlin:$moshi_version") {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
     }
 
@@ -94,20 +92,21 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
+    // Ktx
+
+    implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
+
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
     // Koin
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-    testImplementation "org.koin:koin-core:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
     androidTestImplementation "org.koin:koin-test:$koin_version"
 
     // UniFlow
     implementation "io.uniflow:uniflow-androidx:$uniflow_version"
-//    implementation "io.uniflow:uniflow-saferesult:$uniflow_version"
     testImplementation "io.uniflow:uniflow-test:$uniflow_version"
     testImplementation "io.uniflow:uniflow-androidx-test:$uniflow_version"
 

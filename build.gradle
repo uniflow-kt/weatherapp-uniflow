@@ -4,6 +4,7 @@ buildscript {
     apply from: "versions.gradle"
 
     repositories {
+        mavenLocal()
         google()
         jcenter()
         maven {
@@ -22,10 +23,10 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenLocal()
         maven {
             url  "https://dl.bintray.com/ekito/koin"
         }
-        mavenLocal()
         google()
         jcenter()
         maven {

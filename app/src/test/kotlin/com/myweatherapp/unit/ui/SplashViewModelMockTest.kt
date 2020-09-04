@@ -7,6 +7,8 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verifySequence
 import io.uniflow.android.test.MockedViewObserver
+import io.uniflow.android.test.TestViewObserver
+import io.uniflow.android.test.createTestObserver
 import io.uniflow.android.test.mockObservers
 import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.runBlocking
@@ -16,13 +18,13 @@ import org.junit.Test
 class SplashViewModelMockTest : ViewModelTest() {
 
     lateinit var viewModel: SplashViewModel
-    lateinit var view: MockedViewObserver
+    lateinit var view: TestViewObserver
     val loadCurrentWeather: LoadCurrentWeather = mockk()
 
     @Before
     fun before() {
         viewModel = SplashViewModel(loadCurrentWeather)
-        view = viewModel.mockObservers()
+        view = viewModel.createTestObserver()
     }
 
     @Test
@@ -31,10 +33,11 @@ class SplashViewModelMockTest : ViewModelTest() {
 
         viewModel.getLastWeather()
 
-        verifySequence {
-            view.states.onChanged(UIState.Empty)
-            view.states.onChanged(UIState.Success)
-        }
+        view.verifySequence(
+            UIState.Empty,
+            UIState.Loading,
+            UIState.Success
+        )
     }
 
     @Test
@@ -44,9 +47,10 @@ class SplashViewModelMockTest : ViewModelTest() {
 
         viewModel.getLastWeather()
 
-        verifySequence {
-            view.states.onChanged(UIState.Empty)
-            view.states.onChanged(UIState.Failed("getLastWeather failed",error = error))
-        }
+        view.verifySequence(
+            UIState.Empty,
+            UIState.Loading,
+            UIState.Failed("getLastWeather failed",error = error)
+        )
     }
 }

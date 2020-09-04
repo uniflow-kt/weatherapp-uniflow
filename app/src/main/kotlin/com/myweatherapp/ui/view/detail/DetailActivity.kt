@@ -9,6 +9,7 @@ import com.myweatherapp.domain.model.weather.getColorFromCode
 import com.myweatherapp.ui.navigation.param
 import com.myweatherapp.ui.view.Arguments
 import io.uniflow.androidx.flow.onStates
+import io.uniflow.core.flow.data.UIError
 import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
         detailViewModel.getDetail()
     }
 
-    private fun showError(error: Throwable?) {
+    private fun showError(error: UIError?) {
         Snackbar.make(
             weatherItem,
             getString(R.string.loading_error) + " - $error",
