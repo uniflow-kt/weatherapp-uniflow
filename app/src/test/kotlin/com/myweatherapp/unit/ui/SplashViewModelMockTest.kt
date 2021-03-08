@@ -5,11 +5,9 @@ import com.myweatherapp.ui.view.splash.SplashViewModel
 import com.myweatherapp.unit.mvvm.ViewModelTest
 import io.mockk.coEvery
 import io.mockk.mockk
-import io.mockk.verifySequence
-import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.TestViewObserver
 import io.uniflow.android.test.createTestObserver
-import io.uniflow.android.test.mockObservers
+import io.uniflow.core.flow.data.UIEvent
 import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -35,7 +33,7 @@ class SplashViewModelMockTest : ViewModelTest() {
 
         view.verifySequence(
             UIState.Empty,
-            UIState.Loading,
+            UIEvent.Loading,
             UIState.Success
         )
     }
@@ -49,8 +47,8 @@ class SplashViewModelMockTest : ViewModelTest() {
 
         view.verifySequence(
             UIState.Empty,
-            UIState.Loading,
-            UIState.Failed("getLastWeather failed",error = error)
+            UIEvent.Loading,
+            UIState.Failed("getLastWeather failed", error = error)
         )
     }
 }

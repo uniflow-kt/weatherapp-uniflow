@@ -12,7 +12,7 @@ import org.koin.core.context.startKoin
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.inject
 
-class WeatherRepositoryTest : AutoCloseKoinTest {
+class WeatherRepositoryTest : AutoCloseKoinTest() {
 
     val repository by inject<WeatherEntityRepository>()
 

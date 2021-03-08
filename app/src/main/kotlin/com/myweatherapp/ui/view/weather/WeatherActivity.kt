@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.myweatherapp.R
 import com.myweatherapp.ui.navigation.navigateTo
 import com.myweatherapp.ui.view.weather.uimodel.WeatherListState
-import io.uniflow.androidx.flow.onStates
+import io.uniflow.android.livedata.onStates
 import io.uniflow.core.flow.data.UIError
 import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.activity_result.*

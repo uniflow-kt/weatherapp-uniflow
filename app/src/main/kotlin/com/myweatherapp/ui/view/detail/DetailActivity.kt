@@ -8,7 +8,7 @@ import com.myweatherapp.domain.model.weather.DailyForecastId
 import com.myweatherapp.domain.model.weather.getColorFromCode
 import com.myweatherapp.ui.navigation.param
 import com.myweatherapp.ui.view.Arguments
-import io.uniflow.androidx.flow.onStates
+import io.uniflow.android.livedata.onStates
 import io.uniflow.core.flow.data.UIError
 import io.uniflow.core.flow.data.UIState
 import kotlinx.android.synthetic.main.activity_detail.*

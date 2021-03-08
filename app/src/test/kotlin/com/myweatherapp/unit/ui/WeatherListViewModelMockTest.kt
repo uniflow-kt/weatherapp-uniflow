@@ -9,7 +9,7 @@ import com.myweatherapp.unit.mvvm.ViewModelTest
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verifySequence
-import io.uniflow.android.test.MockedViewObserver
+import io.uniflow.android.test.MockViewObserver
 import io.uniflow.android.test.mockObservers
 import io.uniflow.core.flow.data.UIState
 import kotlinx.coroutines.runBlocking
@@ -20,7 +20,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
 
     lateinit var viewModel: WeatherListViewModel
 
-    lateinit var view: MockedViewObserver
+    lateinit var view: MockViewObserver
     val getCurrentWeather: GetCurrentWeather = mockk()
     val getWeatherForLocation: GetWeatherForGivenLocation = mockk()
 
@@ -49,8 +49,7 @@ class WeatherListViewModelMockTest : ViewModelTest() {
         viewModel.getWeather()
         verifySequence {
             view.states.onChanged(UIState.Empty)
-            view.states.onChanged(UIState.Failed("getWeather failed",error = error))
+            view.states.onChanged(UIState.Failed("getWeather failed", error = error))
         }
     }
-
 }

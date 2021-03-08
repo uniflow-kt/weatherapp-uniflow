@@ -1,6 +1,7 @@
 package com.myweatherapp.ui.view.weather
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,9 @@ import com.myweatherapp.ui.view.navigateToDetailActivity
 import com.myweatherapp.ui.view.weather.adapter.WeatherListAdapter
 import com.myweatherapp.ui.view.weather.adapter.WeatherUIItem
 import com.myweatherapp.ui.view.weather.uimodel.WeatherListState
-import io.uniflow.androidx.flow.onStates
+import com.myweatherapp.ui.view.weather.uimodel.WeatherListUIEvent
+import io.uniflow.android.livedata.onEvents
+import io.uniflow.android.livedata.onStates
 import kotlinx.android.synthetic.main.fragment_result_list.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -19,9 +22,9 @@ class WeatherListFragment : androidx.fragment.app.Fragment() {
     private val viewModel: WeatherListViewModel by sharedViewModel()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_result_list, container, false)
     }
@@ -35,15 +38,30 @@ class WeatherListFragment : androidx.fragment.app.Fragment() {
                 is WeatherListState -> showWeatherItemList(state.lastDays)
             }
         }
+
+        onEvents(viewModel) { event ->
+            when (event) { //peek if multi consumer
+                is WeatherListUIEvent.ProceedLocation -> showLoadingLocation(event.location)
+                is WeatherListUIEvent.ProceedLocationFailed -> showLocationSearchFailed(event.location, event.error)
+            }
+        }
+    }
+
+    private fun showLocationSearchFailed(location: String, error: Throwable?) {
+        Log.i(this::class.simpleName, "received WeatherListUIEvent.ProceedLocationFailed")
+    }
+
+    private fun showLoadingLocation(location: String) {
+        Log.i(this::class.simpleName, "received WeatherListUIEvent.ProceedLocation")
     }
 
     private fun prepareListView() {
         weatherList.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         weatherList.adapter = WeatherListAdapter(
-                activity!!,
-                emptyList(),
-                ::onWeatherItemSelected
+            requireActivity(),
+            emptyList(),
+            ::onWeatherItemSelected
         )
     }
 

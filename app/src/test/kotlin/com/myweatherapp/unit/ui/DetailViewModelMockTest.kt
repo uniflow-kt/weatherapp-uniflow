@@ -8,15 +8,11 @@ import com.myweatherapp.unit.MockedData
 import com.myweatherapp.unit.mvvm.ViewModelTest
 import io.mockk.coEvery
 import io.mockk.mockk
-import io.mockk.verifySequence
-import io.uniflow.android.test.MockedViewObserver
 import io.uniflow.android.test.TestViewObserver
 import io.uniflow.android.test.createTestObserver
-import io.uniflow.android.test.mockObservers
 import io.uniflow.core.flow.data.UIState
 import org.junit.Before
 import org.junit.Test
-
 
 class DetailViewModelMockTest : ViewModelTest() {
 
@@ -56,7 +52,7 @@ class DetailViewModelMockTest : ViewModelTest() {
 
         view.verifySequence(
             UIState.Empty,
-            UIState.Failed("getDetail failed",error = error)
+            UIState.Failed("getDetail failed", error = error)
         )
     }
 }

@@ -4,7 +4,11 @@ buildscript {
     apply from: "versions.gradle"
 
     repositories {
-        mavenLocal()
+//        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
         google()
         jcenter()
         maven {
@@ -15,7 +19,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$android_plugin_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.koin:koin-gradle-plugin:$koin_version"
         classpath "com.google.gms:google-services:$google_service_version"
         classpath 'io.fabric.tools:gradle:1+'
     }
@@ -23,15 +26,13 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenLocal()
+//        mavenLocal()
         maven {
-            url  "https://dl.bintray.com/ekito/koin"
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
         }
+        mavenCentral()
         google()
         jcenter()
-        maven {
-            url 'https://maven.google.com/'
-        }
     }
 }
 

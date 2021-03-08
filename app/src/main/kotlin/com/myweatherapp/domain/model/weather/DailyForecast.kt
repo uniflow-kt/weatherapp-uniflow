@@ -15,7 +15,7 @@ data class DailyForecast(
         val temperature: Temperature,
         val wind: Wind,
         val humidity: Humidity,
-        val id: DailyForecastId = DailyForecastId()
+        val id: DailyForecastId = DailyForecastId(location+"_"+day)
 ) {
     val colorCode: Int by lazy { colorCodeFromTemperatureRange(temperature.high.toInt()) }
 

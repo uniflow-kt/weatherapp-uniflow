@@ -20,7 +20,7 @@
         android:textColor="@color/t_white"
         android:textSize="42sp" />
 
-    <com.joanzapata.iconify.widget.IconTextView
+    <TextView
         android:id="@+id/splashIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:textColor="@color/t_white"
         android:textSize="80sp" />
 
-    <com.joanzapata.iconify.widget.IconTextView
+    <TextView
         android:id="@+id/splashIconFail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

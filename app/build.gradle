@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'koin'
 
 android {
     signingConfigs {
@@ -22,7 +21,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        vectorDrawables.useSupportLibrary = true
+//        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -62,18 +61,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Android Support
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.3.0'
 
     // Android Support UI
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    // Firebase Analytics
-    implementation 'com.google.firebase:firebase-core:16.0.7'
+//    // Firebase Analytics
+//    implementation 'com.google.firebase:firebase-core:18.0.2'
 
     // Crashlytics
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+//    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     // Android Test
     testImplementation "io.mockk:mockk:1.9.3"
@@ -87,38 +86,39 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
     }
 
-    // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+//    // Coroutines
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+//    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // Ktx
-
-    implementation "androidx.activity:activity-ktx:1.1.0"
-    implementation "androidx.fragment:fragment-ktx:1.2.5"
+    implementation "androidx.activity:activity-ktx:1.2.0"
+    implementation "androidx.fragment:fragment-ktx:1.3.0"
 
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
     // Koin
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-    testImplementation "org.koin:koin-test:$koin_version"
-    androidTestImplementation "org.koin:koin-test:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    testImplementation "io.insert-koin:koin-test:$koin_version"
 
     // UniFlow
-    implementation "io.uniflow:uniflow-androidx:$uniflow_version"
-    testImplementation "io.uniflow:uniflow-test:$uniflow_version"
-    testImplementation "io.uniflow:uniflow-androidx-test:$uniflow_version"
+//    implementation "org.uniflow-kt:uniflow-core:$uniflow_version"
+    implementation "org.uniflow-kt:uniflow-android:$uniflow_version"
+//    testImplementation "org.uniflow-kt:uniflow-core:$uniflow_version"
+    testImplementation "org.uniflow-kt:uniflow-test:$uniflow_version"
+    testImplementation "org.uniflow-kt:uniflow-android-test:$uniflow_version"
 
     // ViewModel and LiveData
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    testImplementation 'androidx.arch.core:core-testing:2.0.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
     // Room
-    implementation 'androidx.room:room-runtime:2.1.0'
-    kapt 'androidx.room:room-compiler:2.1.0'
-    annotationProcessor 'androidx.room:room-compiler:2.1.0'
-    testImplementation 'androidx.room:room-testing:2.1.0'
+    implementation 'androidx.room:room-runtime:2.2.6'
+    kapt 'androidx.room:room-compiler:2.2.6'
+    annotationProcessor 'androidx.room:room-compiler:2.2.6'
+    testImplementation 'androidx.room:room-testing:2.2.6'
 
     // Networking
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -129,10 +129,10 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     // UI
-    implementation 'com.joanzapata.iconify:android-iconify-weathericons:2.2.2'
+//    implementation 'com.joanzapata.iconify:android-iconify-weathericons:2.2.2'
 
     // Gson
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -141,8 +141,6 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
     kotlinOptions {
         jvmTarget = '1.8'
-        apiVersion = '1.3'
-        languageVersion = '1.3'
         freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
     }
 }

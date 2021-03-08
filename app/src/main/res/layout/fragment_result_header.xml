@@ -35,7 +35,7 @@
             android:layout_gravity="center_vertical|end"
             android:layout_margin="8dp"
             android:src="@drawable/ic_location_on_black_24dp"
-            android:tint="@color/icons_black" />
+            android:color="@color/icons_black" />
 
     </LinearLayout>
 
@@ -59,7 +59,7 @@
             android:textSize="21sp"
             android:textColor="@color/t_white" />
 
-        <com.joanzapata.iconify.widget.IconTextView
+        <TextView
             android:id="@+id/weatherIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.joanzapata.iconify.widget.IconTextView
+            <TextView
                 android:id="@+id/weatherWind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
