@@ -4,7 +4,7 @@ buildscript {
     apply from: "versions.gradle"
 
     repositories {
-//        mavenLocal()
+        mavenLocal()
         mavenCentral()
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots/'
@@ -26,7 +26,7 @@ buildscript {
 
 allprojects {
     repositories {
-//        mavenLocal()
+        mavenLocal()
         maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots/'
         }

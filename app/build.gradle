@@ -92,8 +92,8 @@ dependencies {
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // Ktx
-    implementation "androidx.activity:activity-ktx:1.2.0"
-    implementation "androidx.fragment:fragment-ktx:1.3.0"
+    implementation "androidx.activity:activity-ktx:1.2.1"
+    implementation "androidx.fragment:fragment-ktx:1.3.1"
 
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
@@ -102,11 +102,10 @@ dependencies {
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
     testImplementation "io.insert-koin:koin-test:$koin_version"
+    testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
 
     // UniFlow
-//    implementation "org.uniflow-kt:uniflow-core:$uniflow_version"
     implementation "org.uniflow-kt:uniflow-android:$uniflow_version"
-//    testImplementation "org.uniflow-kt:uniflow-core:$uniflow_version"
     testImplementation "org.uniflow-kt:uniflow-test:$uniflow_version"
     testImplementation "org.uniflow-kt:uniflow-android-test:$uniflow_version"
 

@@ -9,6 +9,7 @@ import org.junit.Assert.assertNotSame
 import org.junit.Before
 import org.junit.Test
 import org.koin.core.context.startKoin
+import org.koin.fileProperties
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.inject
 
